@@ -158,5 +158,5 @@ def group_text_reply(msg):
 if __name__ == '__main__':
 
     draw_wordcloud()
-    itchat.auto_login(hotReload=True,enableCmdQR=True)
+    itchat.auto_login(hotReload=True,enableCmdQR=2)
     itchat.run()
