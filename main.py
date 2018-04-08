@@ -65,7 +65,6 @@ def group_id(name):
 
 # msgType = {1: "文本", 3: "图片", 47: "emoji", 62: "小视频"}
 
-
 # @itchat.msg_register([PICTURE, RECORDING, ATTACHMENT, VIDEO])
 # def download_files(msg):
 #     msg.download(msg.fileName)
@@ -116,11 +115,12 @@ def draw_wordcloud():
     word_cloud.to_file("pjl_cloud.jpg")  #保存图片
 
 
-@itchat.msg_register(TEXT, isGroupChat=True)
+@itchat.msg_register([PICTURE, TEXT], isGroupChat=True)
 def group_text_reply(msg):
     chat_dict = {}
     item = group_id(u'萌炸天🐱')
     if msg['FromUserName'] == item:
+        print(msg["Content"])
         msg_info.insert_one({
             "type":
             msg["MsgType"],
@@ -132,31 +132,8 @@ def group_text_reply(msg):
             time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         })
 
-        items = msg_info.aggregate([{
-            "$match": {
-                "create_at": {
-                    "$gt": time.strftime("%Y-%m-%d", time.localtime())
-                }
-            }
-        }, {
-            "$group": {
-                "_id": "$name",
-                "count": {
-                    "$sum": 1
-                }
-            }
-        }, {
-            "$sort": {
-                "count": -1
-            }
-        }])
-        items = dumps(items)
-        with open('we-chat/dist/static/data.json', 'w') as f:
-            json.dump(items, f, 'UTF-8')
-
 
 if __name__ == '__main__':
-
     draw_wordcloud()
-    itchat.auto_login(hotReload=True,enableCmdQR=2)
+    itchat.auto_login(hotReload=True, enableCmdQR=2)
     itchat.run()

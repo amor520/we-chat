@@ -21,7 +21,7 @@ export default {
   methods: {
     init: function() {
       let vm = this;
-      this.$http.get("/static/data.json").then(
+      this.$http.get("0.0.0.0:5000").then(
         response => {
           let list = response.data;
           let rows = [];
