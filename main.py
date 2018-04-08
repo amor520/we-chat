@@ -16,8 +16,6 @@ from os import path
 import matplotlib.pyplot as plt
 from PIL import Image, ImageDraw, ImageFont
 
-# 绘制词云
-
 connection = Client('mongodb://localhost:27017/')
 mongodb = connection.get_database(
     "wechat",
