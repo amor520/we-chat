@@ -87,6 +87,9 @@ def draw_wordcloud():
     for item in items:
         comment_text += item["content"]
 
+    if comment_text == "":
+        return True
+
     #结巴分词，生成字符串，如果不通过分词，无法直接生成正确的中文词云
     cut_text = " ".join(jieba.cut(comment_text))
     d = path.dirname(__file__)  # 当前文件文件夹所在目录
