@@ -151,7 +151,7 @@ def group_text_reply(msg):
             }
         }])
         items = dumps(items)
-        with open('we-chat/static/data.json', 'w') as f:
+        with open('we-chat/dist/static/data.json', 'w') as f:
             json.dump(items, f, 'UTF-8')
 
 
