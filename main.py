@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import requests, time
 import itchat
 import json
